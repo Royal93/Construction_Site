@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J. NDIMU FIXING PTY LTD - Gallery</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- EmailJS Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>J. NDIMU FIXING PTY LTD</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="home.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gallery.html" class="nav-link active">Gallery</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Gallery Hero Section -->
+    <section class="gallery-hero">
+        <div class="container">
+            <h1>Our Work Gallery</h1>
+            <p>See our completed projects and quality craftsmanship</p>
+        </div>
+    </section>
+
+    <!-- Gallery Content Section -->
+    <section class="gallery-content">
+        <div class="container">
+            <div class="gallery-filter">
+                <button class="filter-btn active" onclick="filterGallery('all')">All Projects</button>
+                <button class="filter-btn" onclick="filterGallery('concrete')">Concrete & Rebar</button>
+                <button class="filter-btn" onclick="filterGallery('formwork')">Formwork</button>
+                <button class="filter-btn" onclick="filterGallery('foundation')">Foundation Work</button>
+                <button class="filter-btn" onclick="filterGallery('structural')">Structural Steel</button>
+                <button class="filter-btn" onclick="filterGallery('building')">Building Construction</button>
+            </div>
+
+            <div class="gallery-grid">
+                <!-- Concrete & Rebar Category -->
+                <div class="gallery-item concrete" onclick="openModal('images/reinforcement-mesh-detail.jpg')">
+                    <img src="images/img6.jpeg" alt="Reinforcement Mesh Detail" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Reinforcement Mesh Detail</h3>
+                        <p>Precision steel mesh installation for maximum concrete strength</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item concrete" onclick="openModal('images/steel-reinforcement-grid.jpg')">
+                    <img src="images/img12.jpeg" alt="Steel Reinforcement Grid" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Steel Reinforcement Grid</h3>
+                        <p>Complex rebar grid pattern for heavy-duty concrete slabs</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item concrete" onclick="openModal('images/rebar-installation-process.jpg')">
+                    <img src="images/img16.jpeg" alt="Rebar Installation Process" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Rebar Installation Process</h3>
+                        <p>Professional team installing reinforcement bars with precision</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item concrete" onclick="openModal('images/concrete-preparation-team.jpg')">
+                    <img src="images/img17.jpeg" alt="Concrete Preparation Team" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Concrete Preparation Team</h3>
+                        <p>Expert workers preparing reinforcement for concrete pour</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item concrete" onclick="openModal('images/reinforcement-cage-assembly.jpg')">
+                    <img src="images/img17.jpeg" alt="Reinforcement Cage Assembly" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Reinforcement Cage Assembly</h3>
+                        <p>Complex rebar cage construction for structural elements</p>
+                    </div>
+                </div>
+
+                <!-- Foundation Work Category -->
+                <div class="gallery-item foundation" onclick="openModal('images/foundation-construction-overview.jpg')">
+                    <img src="images/img1.jpeg" alt="Foundation Construction Overview" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Foundation Construction Overview</h3>
+                        <p>Large-scale foundation construction with steel reinforcement</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item foundation" onclick="openModal('images/aerial-foundation-view.jpg')">
+                    <img src="images/img2.jpeg" alt="Aerial Foundation View" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Aerial Foundation View</h3>
+                        <p>Bird's eye view of complex foundation work in progress</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item foundation" onclick="openModal('images/foundation-rebar-layout.jpg')">
+                    <img src="images/img7.jpeg" alt="Foundation Rebar Layout" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Foundation Rebar Layout</h3>
+                        <p>Systematic rebar placement for optimal foundation strength</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item foundation" onclick="openModal('images/deep-foundation-work.jpg')">
+                    <img src="images/img9.jpeg" alt="Deep Foundation Work" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Deep Foundation Work</h3>
+                        <p>Deep excavation and foundation preparation for high-rise building</p>
+                    </div>
+                </div>
+
+                <!-- Formwork Category -->
+                <div class="gallery-item formwork" onclick="openModal('images/formwork-installation.jpg')">
+                    <img src="images/img4.jpeg" alt="Formwork Installation" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Formwork Installation</h3>
+                        <p>Precision formwork setup for concrete beam construction</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item formwork" onclick="openModal('images/post-tensioning-system.jpg')">
+                    <img src="images/img5.jpeg" alt="Post-Tensioning System" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Post-Tensioning System</h3>
+                        <p>Advanced post-tensioning cable installation with formwork</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item formwork" onclick="openModal('images/walkway-formwork.jpg')">
+                    <img src="images/img18.jpeg" alt="Walkway Formwork" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Walkway Formwork</h3>
+                        <p>Safe walkway construction through reinforcement areas</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item formwork" onclick="openModal('images/concrete-pour-preparation.jpg')">
+                    <img src="images/img8.jpeg" alt="Concrete Pour Preparation" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Concrete Pour Preparation</h3>
+                        <p>Final preparations before concrete pour with safety measures</p>
+                    </div>
+                </div>
+
+                <!-- Structural Steel Category -->
+                <div class="gallery-item structural" onclick="openModal('images/structural-steel-frame.jpg')">
+                    <img src="images/img10.jpeg" alt="Structural Steel Frame" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Structural Steel Frame</h3>
+                        <p>Multi-story steel frame construction with scaffolding</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item structural" onclick="openModal('images/steel-beam-installation.jpg')">
+                    <img src="images/im13.jpeg" alt="Steel Beam Installation" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Steel Beam Installation</h3>
+                        <p>Heavy steel beam placement using crane operations</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item structural" onclick="openModal('images/rebar-storage-area.jpg')">
+                    <img src="images/gvk.jpg" alt="Rebar Storage Area" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Rebar Storage Area</h3>
+                        <p>Organized steel rebar storage and preparation area</p>
+                    </div>
+                </div>
+
+                <!-- Building Construction Category -->
+                <div class="gallery-item building" onclick="openModal('images/building-under-construction.jpg')">
+                    <img src="images/img11.jpeg" alt="Building Under Construction" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Building Under Construction</h3>
+                        <p>Multi-story building construction with comprehensive scaffolding</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item building" onclick="openModal('images/high-rise-construction.jpg')">
+                    <img src="images/img3.jpeg" alt="High-Rise Construction" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>High-Rise Construction</h3>
+                        <p>Complex high-rise building construction project</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item building" onclick="openModal('images/construction-site-overview.jpg')">
+                    <img src="images/img19.jpeg" alt="Construction Site Overview" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Construction Site Overview</h3>
+                        <p>Complete construction site with multiple building phases</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item building" onclick="openModal('images/building-facade-construction.jpg')">
+                    <img src="images/img20.jpeg" alt="Building Facade Construction" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Building Facade Construction</h3>
+                        <p>Exterior wall construction with modern architectural elements</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Gallery Images -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage" alt="Gallery Image">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Premier Construction</h3>
+                    <p>Building excellence with over 15 years of experience in construction services. Your trusted partner for foundations, concrete work, and structural solutions.</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/premierconstruction" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://instagram.com/premierconstruction" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://linkedin.com/company/premierconstruction" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://twitter.com/premierconstruct" target="_blank" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://youtube.com/premierconstruction" target="_blank" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://wa.me/27655931109" target="_blank" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">Concrete & Rebar Fixing</a></li>
+                        <li><a href="about.html">Formwork Installation</a></li>
+                        <li><a href="about.html">Foundation Work</a></li>
+                        <li><a href="about.html">Power Floating Concrete</a></li>
+                        <li><a href="about.html">Paving Solutions</a></li>
+                        <li><a href="about.html">Plumbing Services</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="gallery.html">Project Gallery</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="contact.html">Get Quote</a></li>
+                        <li><a href="contact.html">Free Consultation</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Address:</strong><br>
+                                123 Construction Avenue<br>
+                                Builder City, BC 12345
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Phone:</strong><br>
+                                <a href="tel:+27655931109">+27655931109</a>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Email:</strong><br>
+                                <a href="mailto:gorongaroyal@gmail.com">gorongaroyal@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Hours:</strong><br>
+                                Mon-Fri: 7:00 AM - 6:00 PM<br>
+                                Saturday: 8:00 AM - 4:00 PM
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 J. NDIMU FIXING PTY LTD. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <span>|</span>
+                        <a href="#">Terms of Service</a>
+                        <span>|</span>
+                        <a href="#">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="myjavascript.js"></script>
+</body>
+</html>
