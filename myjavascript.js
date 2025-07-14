@@ -1,6 +1,6 @@
 // Company Configuration - Corrected and consistent
 const COMPANY_CONFIG = {
-    whatsapp: '27675931789', // Your WhatsApp number (consistent across all files)
+    whatsapp: '27618285409', // Your WhatsApp number (consistent across all files)
     email: 'josephndimu0@gmail.com', // Your company email (consistent)
     name: 'J. NDIMU FIXING PTY LTD'
 };
@@ -205,7 +205,7 @@ ${data.message}
 This inquiry was submitted through your website contact form. Please respond promptly.
 
 Thanks!
-Premier Construction`;
+J. NDIMU FIXING PTY LTD`;
 }
 
 function createEmailContent(data) {
@@ -260,11 +260,10 @@ function showSendOptions(whatsappMessage, emailContent, formData, callback) {
     // Create modal for send options
     const modal = document.createElement('div');
     modal.className = 'send-options-modal';
-    modal.style.display = 'flex'; // Show immediately
     modal.innerHTML = `
         <div class="send-options-content">
             <h3>Choose How to Send Your Inquiry</h3>
-            <p>Your inquiry has been prepared. Choose your preferred method to contact Premier Construction:</p>
+            <p>Your inquiry has been prepared. Choose your preferred method to contact J. NDIMU FIXING:</p>
             
             <div class="send-buttons">
                 <button class="send-btn whatsapp-btn" id="whatsappBtn">
@@ -289,6 +288,11 @@ function showSendOptions(whatsappMessage, emailContent, formData, callback) {
     
     document.body.appendChild(modal);
     
+    // Show modal with animation
+    setTimeout(() => {
+        modal.style.display = 'flex';
+    }, 10);
+    
     // Add event listeners to the buttons
     document.getElementById('whatsappBtn').addEventListener('click', function() {
         console.log('WhatsApp button clicked');
@@ -311,6 +315,8 @@ function showSendOptions(whatsappMessage, emailContent, formData, callback) {
     document.getElementById('closeBtn').addEventListener('click', function() {
         console.log('Close button clicked');
         closeModal();
+        // Reset form submission button
+        resetSubmitButton();
     });
     
     // Close modal when clicking outside
@@ -318,13 +324,36 @@ function showSendOptions(whatsappMessage, emailContent, formData, callback) {
         if (e.target === modal) {
             console.log('Modal backdrop clicked');
             closeModal();
+            resetSubmitButton();
         }
     });
+    
+    // Close modal on Escape key
+    const handleEscape = function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+            resetSubmitButton();
+            document.removeEventListener('keydown', handleEscape);
+        }
+    };
+    document.addEventListener('keydown', handleEscape);
     
     function closeModal() {
         console.log('Closing modal...');
         if (modal && modal.parentNode) {
-            modal.remove();
+            modal.style.display = 'none';
+            setTimeout(() => {
+                modal.remove();
+            }, 300);
+        }
+        document.removeEventListener('keydown', handleEscape);
+    }
+    
+    function resetSubmitButton() {
+        const submitBtn = document.querySelector('.submit-btn');
+        if (submitBtn) {
+            submitBtn.textContent = 'Send Message';
+            submitBtn.disabled = false;
         }
     }
     
@@ -528,28 +557,33 @@ function showSuccessMessage(customMessage = null) {
 function showErrorMessage(message) {
     console.log('Showing error message:', message);
     
-    // Create error message element if it doesn't exist
-    let errorDiv = document.getElementById('errorMessage');
-    if (!errorDiv) {
-        errorDiv = document.createElement('div');
-        errorDiv.id = 'errorMessage';
-        errorDiv.className = 'error-message-popup';
-        errorDiv.innerHTML = `
-            <div class="error-content">
-                <i class="fas fa-exclamation-triangle"></i>
-                <h3>Error</h3>
-                <p id="errorText"></p>
-                <button onclick="closeErrorMessage()">Close</button>
-            </div>
-        `;
-        document.body.appendChild(errorDiv);
+    // Remove any existing error message
+    const existingError = document.getElementById('errorMessage');
+    if (existingError) {
+        existingError.remove();
     }
     
-    // Update error message text
-    document.getElementById('errorText').textContent = message;
-    errorDiv.style.display = 'flex';
+    // Create error message element
+    const errorDiv = document.createElement('div');
+    errorDiv.id = 'errorMessage';
+    errorDiv.className = 'error-message-popup';
+    errorDiv.innerHTML = `
+        <div class="error-content">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Error</h3>
+            <p id="errorText">${message}</p>
+            <button onclick="closeErrorMessage()">Close</button>
+        </div>
+    `;
     
-    // Auto-hide after 8 seconds (longer for error messages)
+    document.body.appendChild(errorDiv);
+    
+    // Show error message
+    setTimeout(() => {
+        errorDiv.style.display = 'flex';
+    }, 10);
+    
+    // Auto-hide after 8 seconds
     setTimeout(() => {
         closeErrorMessage();
     }, 8000);
@@ -559,6 +593,9 @@ function closeErrorMessage() {
     const errorMessage = document.getElementById('errorMessage');
     if (errorMessage) {
         errorMessage.style.display = 'none';
+        setTimeout(() => {
+            errorMessage.remove();
+        }, 300);
     }
 }
 
@@ -570,250 +607,6 @@ function closeSuccessMessage() {
 }
 
 // Gallery Functionality
-function filterGallery(category) {
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    
-    // Update active filter button
-    filterBtns.forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
-    
-    // Filter gallery items
-    galleryItems.forEach(item => {
-        if (category === 'all' || item.classList.contains(category)) {
-            item.style.display = 'block';
-            // Add animation
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(20px)';
-            setTimeout(() => {
-                item.style.transition = 'all 0.5s ease';
-                item.style.opacity = '1';
-                item.style.transform = 'translateY(0)';
-            }, 100);
-        } else {
-            item.style.display = 'none';
-        }
-    });
-}
-
-// Modal Functionality
-function openModal(imageSrc) {
-    const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImage');
-    
-    if (modal && modalImg) {
-        modal.style.display = 'block';
-        modalImg.src = imageSrc;
-    }
-}
-
-function closeModal() {
-    const modal = document.getElementById('imageModal');
-    if (modal) {
-        modal.style.display = 'none';
-    }
-}
-
-// Close modal when clicking outside the image
-document.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('imageModal');
-    if (modal) {
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
-    }
-});
-
-// Smooth scrolling for better UX
-document.addEventListener('DOMContentLoaded', function() {
-    // Add smooth scrolling to all internal links
-    const links = document.querySelectorAll('a[href^="#"]');
-    links.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-});
-
-// Add loading animation for images
-document.addEventListener('DOMContentLoaded', function() {
-    const images = document.querySelectorAll('img');
-    images.forEach(img => {
-        img.addEventListener('load', function() {
-            this.style.opacity = '1';
-        });
-        
-        // Set initial opacity for loading effect
-        img.style.opacity = '0';
-        img.style.transition = 'opacity 0.3s ease';
-        
-        // If image is already loaded (from cache)
-        if (img.complete) {
-            img.style.opacity = '1';
-        }
-    });
-});
-
-// Intersection Observer for animations
-document.addEventListener('DOMContentLoaded', function() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // Animate service cards, gallery items, etc.
-    const elementsToAnimate = document.querySelectorAll('.service-card, .service-detail, .gallery-item, .home-project-item');
-    elementsToAnimate.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'all 0.6s ease';
-        observer.observe(el);
-    });
-});
-
-// Active navigation highlighting
-document.addEventListener('DOMContentLoaded', function() {
-    const currentLocation = location.pathname.split('/').pop() || 'home.html';
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        if (href === currentLocation || (currentLocation === '' && href === 'home.html')) {
-            link.classList.add('active');
-        } else {
-            link.classList.remove('active');
-        }
-    });
-});
-
-// Close mobile menu when clicking on a link
-document.addEventListener('DOMContentLoaded', function() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    const navMenu = document.querySelector('.nav-menu');
-    const hamburger = document.querySelector('.hamburger');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            if (navMenu && hamburger) {
-                navMenu.classList.remove('active');
-                hamburger.classList.remove('active');
-            }
-        });
-    });
-});
-
-// Scroll to top functionality
-function scrollToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-}
-
-// Add scroll to top button functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const scrollToTopBtn = document.createElement('button');
-    scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    scrollToTopBtn.className = 'scroll-to-top';
-    scrollToTopBtn.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: #ff6b35;
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        cursor: pointer;
-        display: none;
-        z-index: 1000;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        transition: all 0.3s ease;
-    `;
-    
-    document.body.appendChild(scrollToTopBtn);
-    
-    scrollToTopBtn.addEventListener('click', scrollToTop);
-    
-    // Show/hide scroll to top button
-    window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 300) {
-            scrollToTopBtn.style.display = 'block';
-        } else {
-            scrollToTopBtn.style.display = 'none';
-        }
-    });
-    
-    scrollToTopBtn.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-3px)';
-        this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.4)';
-    });
-    
-    scrollToTopBtn.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0)';
-        this.style.boxShadow = '0 2px 10px rgba(0,0,0,0.3)';
-    });
-});
-
-// Debug functions for testing
-function testWhatsApp() {
-    const testMessage = "Test message from Premier Construction website";
-    sendViaWhatsApp(testMessage);
-}
-
-function testEmailJS() {
-    const testData = {
-        firstName: "Test",
-        surname: "User",
-        email: "test@example.com",
-        phone: "1234567890",
-        service: "concrete",
-        message: "This is a test email from the website contact form."
-    };
-    
-    sendViaEmailJS(testData, () => {}, () => {});
-}
-
-// Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('J.NDIMU FIXING JavaScript loaded successfully');
-    console.log('Contact configuration:', {
-        whatsapp: COMPANY_CONFIG.whatsapp,
-        email: COMPANY_CONFIG.email,
-        company: COMPANY_CONFIG.name
-    });
-    
-    // Check EmailJS configuration
-    if (EMAILJS_CONFIG.publicKey === 'AVL9ApJUojyKrG1f-') {
-        console.warn('⚠️ EmailJS not configured yet. Please set up your EmailJS credentials.');
-    }
-});
-
-// ==========================================
-// ENHANCED GALLERY FUNCTIONALITY
-// Add these functions to your myjavavascript.js file
-// ==========================================
-
-// Updated Gallery Functionality with Image Loading and Better Filtering
 function filterGallery(category) {
     const galleryItems = document.querySelectorAll('.gallery-item');
     const filterBtns = document.querySelectorAll('.filter-btn');
@@ -950,8 +743,7 @@ function initializeGalleryImages() {
     });
 }
 
-// Add this to your existing DOMContentLoaded event listener
-// Or create a new one if you don't have one for gallery
+// Smooth scrolling for better UX
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize gallery images
     initializeGalleryImages();
@@ -1000,5 +792,184 @@ document.addEventListener('DOMContentLoaded', function() {
         galleryObserver.observe(item);
     });
     
+    // Add smooth scrolling to all internal links
+    const links = document.querySelectorAll('a[href^="#"]');
+    links.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
     console.log('Gallery initialized with', galleryItems.length, 'items');
+});
+
+// Add loading animation for images
+document.addEventListener('DOMContentLoaded', function() {
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+        img.addEventListener('load', function() {
+            this.style.opacity = '1';
+        });
+        
+        // Set initial opacity for loading effect
+        img.style.opacity = '0';
+        img.style.transition = 'opacity 0.3s ease';
+        
+        // If image is already loaded (from cache)
+        if (img.complete) {
+            img.style.opacity = '1';
+        }
+    });
+});
+
+// Intersection Observer for animations
+document.addEventListener('DOMContentLoaded', function() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    // Animate service cards, gallery items, etc.
+    const elementsToAnimate = document.querySelectorAll('.service-card, .service-detail, .gallery-item, .index-project-item');
+    elementsToAnimate.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.6s ease';
+        observer.observe(el);
+    });
+});
+
+// Active navigation highlighting
+document.addEventListener('DOMContentLoaded', function() {
+    const currentLocation = location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentLocation || (currentLocation === '' && href === 'index.html')) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+});
+
+// Close mobile menu when clicking on a link
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    const navMenu = document.querySelector('.nav-menu');
+    const hamburger = document.querySelector('.hamburger');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (navMenu && hamburger) {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+    });
+});
+
+// Scroll to top functionality
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// Add scroll to top button functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const scrollToTopBtn = document.createElement('button');
+    scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    scrollToTopBtn.className = 'scroll-to-top';
+    scrollToTopBtn.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #ff6b35;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        display: none;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        transition: all 0.3s ease;
+    `;
+    
+    document.body.appendChild(scrollToTopBtn);
+    
+    scrollToTopBtn.addEventListener('click', scrollToTop);
+    
+    // Show/hide scroll to top button
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            scrollToTopBtn.style.display = 'block';
+        } else {
+            scrollToTopBtn.style.display = 'none';
+        }
+    });
+    
+    scrollToTopBtn.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-3px)';
+        this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.4)';
+    });
+    
+    scrollToTopBtn.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+        this.style.boxShadow = '0 2px 10px rgba(0,0,0,0.3)';
+    });
+});
+
+// Debug functions for testing
+function testWhatsApp() {
+    const testMessage = "Test message from J. NDIMU FIXING website";
+    sendViaWhatsApp(testMessage);
+}
+
+function testEmailJS() {
+    const testData = {
+        firstName: "Test",
+        surname: "User",
+        email: "test@example.com",
+        phone: "1234567890",
+        service: "concrete",
+        message: "This is a test email from the website contact form."
+    };
+    
+    sendViaEmailJS(testData, () => {}, () => {});
+}
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('J.NDIMU FIXING JavaScript loaded successfully');
+    console.log('Contact configuration:', {
+        whatsapp: COMPANY_CONFIG.whatsapp,
+        email: COMPANY_CONFIG.email,
+        company: COMPANY_CONFIG.name
+    });
+    
+    // Check EmailJS configuration
+    if (EMAILJS_CONFIG.publicKey === 'AVL9ApJUojyKrG1f-') {
+        console.warn('⚠️ EmailJS not configured yet. Please set up your EmailJS credentials.');
+    }
 });
